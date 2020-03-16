@@ -1,0 +1,119 @@
+% HyLands_LS_LS simulation with of HyLands Hybrid Landscape evolution model 
+%
+% Script to run simulation described in:
+%
+% Campforts B., Shobe M.C., et al. : HyLands 1.0: a Hybrid
+% Landscape evolution model to simulate the impact of landslides and
+% landslide-derived sediment on landscape evolution. Discussion paper in
+% Geoscientific Model Development,
+% https://geoscientific-model-development.net
+%
+% Author:   Benjamin Campforts (benjamin.campforts@gfz-potsdam.de)
+%
+% See also: HYLANDS, HYLANDS_set
+%
+% Date:     15. March, 2020 
+
+%% Clear environment
+clearvars
+clc
+close all
+
+%% Set path;
+% Not needed if TopoToolbiox is already on the search path of Matlab.
+addpath(genpath('C:\Users\Benjamin\Box Sync\GitHub_UI\TopoToolbox'))
+scriptName= mfilename;
+
+%% Temporal domain
+p.TimeSpan=100;
+p.TimeStep=5;
+
+%% Save and plot
+p.ploteach=1;
+p.saveeach=1;
+p.save_LS_Data=true;
+p.save_LS_D=true;
+p.fileprefix=scriptName;
+
+%% Check for mass balance
+% Check mass balance: for every component and after every iteration
+p.checkMB=true;
+
+%% Plotting and output
+% verbose
+p.verbose=false;
+p.verbose_LS=true;
+
+% Kind of plot: For regular TTLEM output (p.plotSed=false;)
+p.plotSed=true;
+
+%% Initial Surface
+% load output from LS_B model run
+load('Data\output_LS_B_LS.mat');
+DEMIni=crop(output.bedrock,output.I_Domain);
+iniSed=crop(output.sediment,output.I_Domain);
+
+%% Vertical uplift
+p.U_type='uniform';
+UplRate=1e-3;
+T.spatial = GRIDobj(DEMIni)+UplRate;
+
+%% Boundary conditions
+% Define open nodes: Drain towards lower left corner
+p.FlowBC='ll_cor';
+
+% Bedrock elevation at open nodes is set to a fixed value, provided by 
+% p.BC_BedDirVal, defaulting to 0
+% Sediment thickness varies through time as a function of the SPACE
+% mathematics. Thus, at open nodes, the sediment thickness is based on the
+% sediment thickness of the upstream river cell. 
+p.BC_Type='set_VaropenNodes';
+
+%% Make sure flow accumulation honors imposed boundary conditions
+if ~isempty(p.FlowBC)
+    BORDER = getBORDER(DEMIni,p);
+else
+    BORDER=[];
+end
+DEMIni = DEMIni+BORDER;
+DEMIni=fillsinks(DEMIni);
+DEMIni=DEMIni-BORDER;
+
+%% River incision
+p.FlowDir='single';
+p.DrainDir='variable';
+p.K_bed=5e-5;
+p.K_sed=p.K_bed*1.5;
+p.Ff=0;
+p.V=2;
+p.V_Lakes=10;
+p.H_star=0.5;
+p.m=0.5;
+p.n=1;
+
+%% Landsliding
+p.LS_Bed=true;
+p.FlowDirHill='multi';
+p.t_LS=2e3;
+p.Sc_fixed=.7;
+p.maxLS_Size=1e9;
+p.min_HillGrad=tand(0.01);
+p.C_eff=15e3;
+p.Ff_Hill=0.25;
+
+%% Initialize parameter structure
+p   = HYLANDS_set(p);
+
+%% If resultdir does not exist; make it
+if  ~exist(p.resultsdir,'dir')
+    mkdir(p.resultsdir)
+end
+
+%% Model run
+output = HYLANDS(DEMIni,T,p,'iniSed',iniSed);
+output.p = p;
+output.UplRate = UplRate;
+output.DEMIni = DEMIni;
+output.T = T;
+output.iniSed = iniSed;
+save('Data\output_LS_LS.mat','output');
