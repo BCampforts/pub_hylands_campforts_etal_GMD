@@ -10,7 +10,7 @@ Installation instructions and documentation for ttlem are provided at: https://g
 
 ## User manual HyLands
 
-All the scripts can be executed in Matlab. E.g., for the first example just enter the comment: 'HyLands_NoLS_DL' in the command window.
+All the scripts can be executed in Matlab. 
 - HyLands_NoLS_DL.m;    https://doi.org/10.5446/45969
 - HyLands_NoLS_TL.m;    https://doi.org/10.5446/45967
 - HyLands_NoLS_Mixed.m; https://doi.org/10.5446/45968
