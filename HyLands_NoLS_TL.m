@@ -21,7 +21,7 @@ clc
 close all
 %% Set path;
 % Not needed if TopoToolbiox is already on the search path of Matlab.
-addpath(genpath('C:\Users\Benjamin\Box Sync\GitHub_UI\TopoToolbox'))
+% addpath(genpath('C:\Users\Benjamin\Box Sync\GitHub_UI\TopoToolbox'))
 %% Temporal domain
 p.TimeSpan=100e3;
 p.TimeStep=10;
