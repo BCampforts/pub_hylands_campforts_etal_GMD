@@ -64,8 +64,13 @@ T.spatial = GRIDobj(DEMIni)+UplRate;
 %% Boundary conditions
 % Drain towards lower left corner
 p.FlowBC='ll_cor';
-% Define open nodes by providing the index values of open nodes
-p.BC_Type='set_openNodes';
+
+% Bedrock elevation at open nodes is set to a fixed value, provided by 
+% p.BC_BedDirVal, defaulting to 0
+% Sediment thickness varies through time as a function of the SPACE
+% mathematics. Thus, at open nodes, the sediment thickness is based on the
+% sediment thickness of the upstream river cell. 
+p.BC_Type='set_VaropenNodes';
 
 %% Make sure flow accumulation honors imposed boundary conditions
 if ~isempty(p.FlowBC)
