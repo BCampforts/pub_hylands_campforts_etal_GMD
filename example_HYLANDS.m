@@ -55,6 +55,12 @@ p.LS_Bed   = true;
 p.t_LS=5e2;
 p.Sc_fixed = .8;
 p   = HYLANDS_set(p);
+
+%% If resultdir does not exist; make it
+if  ~exist(p.resultsdir,'dir')
+    mkdir(p.resultsdir)
+end
+
 HYLANDS_Out = HYLANDS(DEM,T,p,'iniSed',iniSed);
 
 %% Plot Landslide characterstics
