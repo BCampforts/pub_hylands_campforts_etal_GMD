@@ -3,7 +3,7 @@ This repository contains example code and documentation related to the following
 Campforts B., Shobe M.C., et al. : HyLands 1.0: a Hybrid Landscape evolution model to simulate the impact of landslides and landslide-derived sediment on landscape evolution. Discussion paper in Geoscientific Model Development, https://gmd.copernicus.org/preprints/gmd-2020-74/#discussion
 
 # HyLands model
-<img src= "https://github.com/BCampforts/topotoolbox/tree/HyLands/ttlem/HyLands.jpg" align=" center" >
+<img src= "HyLands.jpg" align=" center" >
 
 HyLands is contained within the ttlem software: https://github.com/BCampforts/topotoolbox/tree/HyLands/ttlem
 Installation instructions and documentation for ttlem are provided at: https://github.com/BCampforts/topotoolbox/tree/HyLands/ttlem
