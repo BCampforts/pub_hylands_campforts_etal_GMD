@@ -5,8 +5,7 @@ Campforts B., Shobe M.C., et al. : HyLands 1.0: a Hybrid Landscape evolution mod
 # HyLands model
 <img src= "HyLands.jpg" align=" center" >
 
-HyLands is contained within the ttlem software: https://github.com/BCampforts/topotoolbox/tree/HyLands/ttlem
-Installation instructions and documentation for ttlem are provided at: https://github.com/BCampforts/topotoolbox/tree/HyLands/ttlem
+HyLands is contained within the ttlem software. Installation instructions and documentation for ttlem are provided at: https://github.com/BCampforts/topotoolbox/tree/HyLands/ttlem
 
 ## User manual HyLands
 
