@@ -1,6 +1,6 @@
 # pub_hylands_campforts_etal_GMD
 This repository contains example code and documentation related to the following manuscript:
-Campforts B., Shobe M.C., et al. : HyLands 1.0: a Hybrid Landscape evolution model to simulate the impact of landslides and landslide-derived sediment on landscape evolution. Discussion paper in Geoscientific Model Development, https://geoscientific-model-development.net
+Campforts B., Shobe M.C., et al. : HyLands 1.0: a Hybrid Landscape evolution model to simulate the impact of landslides and landslide-derived sediment on landscape evolution. Discussion paper in Geoscientific Model Development, https://gmd.copernicus.org/preprints/gmd-2020-74/#discussion
 
 # HyLands model
 <img src= "https://github.com/BCampforts/topotoolbox/blob/master/ttlem/HyLands.jpg" align=" center" >
